@@ -13,11 +13,13 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ServiceCatalog from "./pages/ServiceCatalog";
+import ServiceDetail from "./pages/ServiceDetail";
 import AccountantListing from "./pages/AccountantListing";
 import Dashboard from "./pages/Dashboard";
 
 // Import client dashboard pages
 import Orders from "./pages/dashboard/Orders";
+import NewOrder from "./pages/dashboard/NewOrder";
 import Accountants from "./pages/dashboard/Accountants";
 import Chat from "./pages/dashboard/Chat";
 import Payments from "./pages/dashboard/Payments";
@@ -30,6 +32,13 @@ import Income from "./pages/dashboard/Income";
 
 // Import admin dashboard pages
 import UsersAdmin from "./pages/dashboard/Users";
+
+// Import service category pages
+import TaxReports from "./pages/services/TaxReports";
+import FinancialStatements from "./pages/services/FinancialStatements";
+import Bookkeeping from "./pages/services/Bookkeeping";
+import Payroll from "./pages/services/Payroll";
+import Consultation from "./pages/services/Consultation";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +53,12 @@ const App = () => (
           <Route element={<AppLayout />}>
             <Route path="/" element={<Index />} />
             <Route path="/services" element={<ServiceCatalog />} />
+            <Route path="/services/:id" element={<ServiceDetail />} />
+            <Route path="/services/tax-reports" element={<TaxReports />} />
+            <Route path="/services/financial-statements" element={<FinancialStatements />} />
+            <Route path="/services/bookkeeping" element={<Bookkeeping />} />
+            <Route path="/services/payroll" element={<Payroll />} />
+            <Route path="/services/consultation" element={<Consultation />} />
             <Route path="/accountants" element={<AccountantListing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -55,6 +70,7 @@ const App = () => (
             
             {/* Client routes */}
             <Route path="orders" element={<Orders />} />
+            <Route path="new-order" element={<NewOrder />} />
             <Route path="accountants" element={<Accountants />} />
             
             {/* Accountant routes */}
