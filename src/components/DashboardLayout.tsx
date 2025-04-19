@@ -21,15 +21,19 @@ import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
+// Define a type for the user role to ensure type safety
+type UserRole = "client" | "accountant" | "admin";
+
 interface SidebarItemProps {
   icon: React.ElementType;
   label: string;
   href: string;
   isActive?: boolean;
+  onClick?: () => void; // Add the onClick prop to the interface
 }
 
-const SidebarItem = ({ icon: Icon, label, href, isActive }: SidebarItemProps) => (
-  <Link to={href}>
+const SidebarItem = ({ icon: Icon, label, href, isActive, onClick }: SidebarItemProps) => (
+  <Link to={href} onClick={onClick}>
     <div
       className={cn(
         "flex items-center py-2 px-3 rounded-md text-sm font-medium transition-colors",
@@ -49,7 +53,7 @@ export function DashboardLayout() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   
   // This would come from auth context in a real app
-  const userRole = "client"; // could be "client", "accountant" or "admin"
+  const userRole: UserRole = "client"; // could be "client", "accountant" or "admin"
   
   const clientMenuItems = [
     { icon: Home, label: "Asosiy", href: "/dashboard" },
@@ -78,15 +82,12 @@ export function DashboardLayout() {
   ];
   
   let menuItems;
-  switch (userRole) {
-    case "accountant":
-      menuItems = accountantMenuItems;
-      break;
-    case "admin":
-      menuItems = adminMenuItems;
-      break;
-    default:
-      menuItems = clientMenuItems;
+  if (userRole === "accountant") {
+    menuItems = accountantMenuItems;
+  } else if (userRole === "admin") {
+    menuItems = adminMenuItems;
+  } else {
+    menuItems = clientMenuItems;
   }
 
   return (
