@@ -81,10 +81,11 @@ export function DashboardLayout() {
     { icon: Settings, label: "Sozlamalar", href: "/dashboard/settings" }
   ];
   
+  // Fixed type comparison issues by ensuring we're comparing values of the same UserRole type
   let menuItems;
-  if (userRole === "accountant") {
+  if (userRole === "accountant" as UserRole) {
     menuItems = accountantMenuItems;
-  } else if (userRole === "admin") {
+  } else if (userRole === "admin" as UserRole) {
     menuItems = adminMenuItems;
   } else {
     menuItems = clientMenuItems;
@@ -208,9 +209,9 @@ export function DashboardLayout() {
                   <div className="ml-2 hidden md:flex flex-col">
                     <span className="text-sm font-medium">Aziz Ismoilov</span>
                     <span className="text-xs text-gray-500">
-                      {userRole === "client" && "Mijoz"}
-                      {userRole === "accountant" && "Buxgalter"}
-                      {userRole === "admin" && "Administrator"}
+                      {userRole === "client" as UserRole && "Mijoz"}
+                      {userRole === "accountant" as UserRole && "Buxgalter"}
+                      {userRole === "admin" as UserRole && "Administrator"}
                     </span>
                   </div>
                 </div>
