@@ -13,11 +13,11 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import { useMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";  // Changed from useMobile to useIsMobile
 
 export function AppHeader() {
   const [isOpen, setIsOpen] = useState(false);
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();  // Kept the same variable name, just fixed the import
 
   const closeMenu = () => setIsOpen(false);
 
