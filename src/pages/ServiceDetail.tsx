@@ -1,11 +1,14 @@
 
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, CheckCircle } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ServiceDetail() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const { toast } = useToast();
   
   // This is mock data for the service details
   // In a real application, you'd fetch this from an API based on the id
@@ -50,6 +53,27 @@ export default function ServiceDetail() {
     features: [],
     fullDescription: "Bu xizmat haqida to'liq ma'lumot topilmadi. Iltimos, biz bilan bog'laning."
   };
+
+  // Function to handle order creation for this service
+  const handleOrderService = () => {
+    // If user is logged in, navigate to new order page
+    // In a real app, you would check authentication status
+    const isLoggedIn = true; // Mock authentication check
+    
+    if (isLoggedIn) {
+      // Navigate to new order page with service ID as URL parameter
+      navigate(`/dashboard/new-order?service=${service.category}-${service.id}`);
+    } else {
+      // Show login prompt
+      toast({
+        title: "Avval tizimga kiring",
+        description: "Buyurtma berish uchun avval tizimga kirishingiz kerak",
+        variant: "destructive",
+      });
+      // Navigate to login page with redirect back
+      navigate(`/login?redirect=/services/${id}`);
+    }
+  };
   
   return (
     <div className="container mx-auto py-12 px-4">
@@ -77,7 +101,10 @@ export default function ServiceDetail() {
                     {service.category === "payroll" && <span className="text-sm font-normal"> / xodim</span>}
                   </p>
                 </div>
-                <Button className="mt-4 bg-accountblue-600 hover:bg-accountblue-700">
+                <Button 
+                  className="mt-4 bg-accountblue-600 hover:bg-accountblue-700"
+                  onClick={handleOrderService}
+                >
                   Buyurtma berish
                 </Button>
               </div>
@@ -106,7 +133,10 @@ export default function ServiceDetail() {
             <Button variant="outline" className="border-accountblue-300 text-accountblue-700">
               +998 71 123 45 67
             </Button>
-            <Button className="bg-accountblue-600 hover:bg-accountblue-700">
+            <Button 
+              className="bg-accountblue-600 hover:bg-accountblue-700"
+              onClick={() => navigate("/contact")}
+            >
               Savol yuborish
             </Button>
           </div>

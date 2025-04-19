@@ -1,16 +1,19 @@
 
-import React from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Star, MessageSquare, CheckCircle, Calendar } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function AccountantDetail() {
   const { id } = useParams<{ id: string }>();
   const accountantId = id ? parseInt(id) : 1;
+  const navigate = useNavigate();
+  const { toast } = useToast();
   
   // Mock data for the accountant details
   const accountant = {
@@ -64,6 +67,12 @@ export default function AccountantDetail() {
     completedProjects: 48
   };
 
+  // Function to handle placing an order with this accountant
+  const handleOrderWithAccountant = () => {
+    // Navigate to new order page with accountant ID as query parameter
+    navigate(`/dashboard/new-order?accountantId=${accountantId}`);
+  };
+
   return (
     <div className="container mx-auto py-12 px-4">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -111,11 +120,9 @@ export default function AccountantDetail() {
                       Murojaat qilish
                     </Button>
                   </Link>
-                  <Link to={`/dashboard/new-order?accountant=${accountant.id}`} className="w-full">
-                    <Button variant="outline" className="w-full">
-                      Buyurtma berish
-                    </Button>
-                  </Link>
+                  <Button variant="outline" className="w-full" onClick={handleOrderWithAccountant}>
+                    Buyurtma berish
+                  </Button>
                 </div>
               </div>
             </CardContent>
@@ -272,9 +279,7 @@ export default function AccountantDetail() {
                     </p>
                     <div className="flex justify-between items-center">
                       <span className="font-medium">150,000 so'm / soat</span>
-                      <Link to={`/dashboard/new-order?accountant=${accountant.id}&service=tax-reports`}>
-                        <Button variant="outline" size="sm">Buyurtma berish</Button>
-                      </Link>
+                      <Button variant="outline" size="sm" onClick={() => handleOrderWithAccountant()}>Buyurtma berish</Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -287,9 +292,7 @@ export default function AccountantDetail() {
                     </p>
                     <div className="flex justify-between items-center">
                       <span className="font-medium">180,000 so'm / soat</span>
-                      <Link to={`/dashboard/new-order?accountant=${accountant.id}&service=financial-statements`}>
-                        <Button variant="outline" size="sm">Buyurtma berish</Button>
-                      </Link>
+                      <Button variant="outline" size="sm" onClick={() => handleOrderWithAccountant()}>Buyurtma berish</Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -302,9 +305,7 @@ export default function AccountantDetail() {
                     </p>
                     <div className="flex justify-between items-center">
                       <span className="font-medium">200,000 so'm / soat</span>
-                      <Link to={`/dashboard/new-order?accountant=${accountant.id}&service=consultation`}>
-                        <Button variant="outline" size="sm">Buyurtma berish</Button>
-                      </Link>
+                      <Button variant="outline" size="sm" onClick={() => handleOrderWithAccountant()}>Buyurtma berish</Button>
                     </div>
                   </CardContent>
                 </Card>
