@@ -10,4 +10,6 @@ export interface Service {
   custom?: boolean;
   hourly?: boolean;
   features: string[];
+  slug?: string; // For URL-friendly names
+  detailUrl?: string; // For linking to detail pages
 }

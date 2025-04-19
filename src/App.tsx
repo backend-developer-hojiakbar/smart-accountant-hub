@@ -15,6 +15,7 @@ import Register from "./pages/Register";
 import ServiceCatalog from "./pages/ServiceCatalog";
 import ServiceDetail from "./pages/ServiceDetail";
 import AccountantListing from "./pages/AccountantListing";
+import AccountantDetail from "./pages/Accountants";
 import Dashboard from "./pages/Dashboard";
 
 // Import client dashboard pages
@@ -60,6 +61,7 @@ const App = () => (
             <Route path="/services/payroll" element={<Payroll />} />
             <Route path="/services/consultation" element={<Consultation />} />
             <Route path="/accountants" element={<AccountantListing />} />
+            <Route path="/accountants/:id" element={<AccountantDetail />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>
@@ -70,6 +72,7 @@ const App = () => (
             
             {/* Client routes */}
             <Route path="orders" element={<Orders />} />
+            <Route path="orders/:id" element={<Orders />} />
             <Route path="new-order" element={<NewOrder />} />
             <Route path="accountants" element={<Accountants />} />
             
