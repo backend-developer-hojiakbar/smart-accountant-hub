@@ -15,8 +15,10 @@ import Register from "./pages/Register";
 import ServiceCatalog from "./pages/ServiceCatalog";
 import ServiceDetail from "./pages/ServiceDetail";
 import AccountantListing from "./pages/AccountantListing";
-import AccountantDetail from "./pages/Accountants";
+import AccountantDetail from "./pages/AccountantDetail";
 import Dashboard from "./pages/Dashboard";
+import AboutUs from "./pages/AboutUs";
+import Contact from "./pages/Contact";
 
 // Import client dashboard pages
 import Orders from "./pages/dashboard/Orders";
@@ -62,6 +64,8 @@ const App = () => (
             <Route path="/services/consultation" element={<Consultation />} />
             <Route path="/accountants" element={<AccountantListing />} />
             <Route path="/accountants/:id" element={<AccountantDetail />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>
